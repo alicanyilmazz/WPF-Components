@@ -27,7 +27,7 @@
         <Canvas x:Name="RootCanvas" Margin="40">
             <!-- HER ZAMAN GÖRÜNEN İNCE, YUMUŞAK KÖŞELİ MAVİ ÇERÇEVE -->
             <Path x:Name="BaseBorderPath"
-                  Stroke="#2017B2E6"
+                  Stroke="#3017B2E6"
                   StrokeThickness="1.2"
                   StrokeLineJoin="Round"
                   Fill="Transparent" />
