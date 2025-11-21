@@ -1,0 +1,45 @@
+﻿<Window x:Class="Spinner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spinner"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Background="White"
+        Title="MainWindow"   Height="350" Width="525"
+       
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- YILAN GRADIENTİ: uçlar açık, ortası #17B2E6 -->
+        <LinearGradientBrush x:Key="SnakeStrokeBrush"
+                             StartPoint="0,0" EndPoint="1,0"
+                             MappingMode="RelativeToBoundingBox">
+            <GradientStop Color="#D0F0FF" Offset="0.0"/>
+            <GradientStop Color="#FF17B2E6" Offset="0.3"/>
+            <GradientStop Color="#FF17B2E6" Offset="0.7"/>
+            <GradientStop Color="#D0F0FF" Offset="1.0"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+
+    <Grid Background="White">
+        <Canvas x:Name="RootCanvas" Margin="40">
+            <!-- HER ZAMAN GÖRÜNEN İNCE, YUMUŞAK KÖŞELİ MAVİ ÇERÇEVE -->
+            <Path x:Name="BaseBorderPath"
+                  Stroke="#2017B2E6"
+                  StrokeThickness="1.2"
+                  StrokeLineJoin="Round"
+                  Fill="Transparent" />
+
+            <!-- YUVARLAK KÖŞELİ YILAN ÇİZGİSİ (MANUEL ÇİZİYORUZ) -->
+            <Path x:Name="SnakePath"
+                  Stroke="{StaticResource SnakeStrokeBrush}"
+                  StrokeThickness="4"
+                  StrokeStartLineCap="Round"
+                  StrokeEndLineCap="Round"
+                  StrokeLineJoin="Round"
+                  Fill="Transparent" />
+        </Canvas>
+    </Grid>
+</Window>
