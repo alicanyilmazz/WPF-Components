@@ -16,24 +16,21 @@
         <LinearGradientBrush x:Key="SnakeStrokeBrush"
                          StartPoint="0,0" EndPoint="1,0"
                          MappingMode="RelativeToBoundingBox">
-            <!-- Sol uç: #00B8FF'e çok yakın, biraz daha koyu -->
-          
+            <!-- Kenarlarda en koyu mavi (yine de yakın ton) -->
+            <GradientStop Color="#00B0FF" Offset="0.0"/>
 
-            <!-- Ortaya yaklaşırken: orta ton mavi -->
-            <GradientStop Color="#00B8FF" Offset="0"/>
+            <!-- Ortaya doğru orta ton mavi -->
+            <GradientStop Color="#00B8FF" Offset="0.25"/>
 
-            <GradientStop Color="#00E5FF" Offset="0.15"/>
-
-            <!-- ORTA PARLAK BAND -->
+            <!-- ORTA HER ZAMAN EN AÇIK: #00E5FF -->
             <GradientStop Color="#00E5FF" Offset="0.45"/>
             <GradientStop Color="#00E5FF" Offset="0.55"/>
 
             <!-- Ortadan uzaklaşırken tekrar orta ton -->
-
-
-            <!-- Sağ uç: yine çok az daha koyu -->
-            <GradientStop Color="#00E5FF" Offset="0.05"/>
             <GradientStop Color="#00B8FF" Offset="0.75"/>
+
+            <!-- Sağ uç: yine en koyu mavi (ama yakın ton) -->
+            <GradientStop Color="#00B0FF" Offset="1.0"/>
         </LinearGradientBrush>
     </Window.Resources>
 
