@@ -7,52 +7,55 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Background="#FF1E1E1E"
-        Title="MainWindow"   Height="350" Width="525"
-       
+        Title="MainWindow"
+        Height="350" Width="525"
         WindowStartupLocation="CenterScreen">
-
 
     <Window.Resources>
         <LinearGradientBrush x:Key="SnakeStrokeBrush"
                          StartPoint="0,0" EndPoint="1,0"
                          MappingMode="RelativeToBoundingBox">
-            <!-- Kenarlar: ortaya daha yakın (daha açık) -->
-            <GradientStop Color="#00C4FF" Offset="0.0"/>
 
-            <!-- Ortaya yaklaşırken: iyice yaklaşmış açık mavi -->
-            <GradientStop Color="#00D8FF" Offset="0.25"/>
+            <!-- Tail: çok kısa, neredeyse nokta kadar silinme -->
+            <GradientStop Color="#0000C4FF" Offset="0.0"/>
+            <!-- tamamen transparan -->
+            <GradientStop Color="#AA00C4FF" Offset="0.015"/>
+            <!-- hızlıca opaklaşıyor -->
 
-            <!-- ORTAYA YAKIN GLOW -->
-            <GradientStop Color="#40F0FF" Offset="0.40"/>
+            <!-- Kenarlara yakın bölgeler: tamamen opak mavi tonları -->
+            <GradientStop Color="#FF00D8FF" Offset="0.20"/>
 
-            <!-- TAM FOSFORLU MERKEZ -->
-            <GradientStop Color="#80FAFF" Offset="0.50"/>
+            <!-- Glow + fosforlu merkez -->
+            <GradientStop Color="#FF40F0FF" Offset="0.38"/>
+            <GradientStop Color="#FF80FAFF" Offset="0.50"/>
+            <GradientStop Color="#FF40F0FF" Offset="0.62"/>
 
-            <!-- Glow’dan tekrar geri -->
-            <GradientStop Color="#40F0FF" Offset="0.60"/>
-            <GradientStop Color="#00D8FF" Offset="0.75"/>
+            <!-- Diğer kenara doğru tekrar opak mavi -->
+            <GradientStop Color="#FF00D8FF" Offset="0.80"/>
 
-            <!-- Sağ kenar: yine ortaya yakın -->
-            <GradientStop Color="#00C4FF" Offset="1.0"/>
+            <!-- Head: yine çok kısa silinme -->
+            <GradientStop Color="#AA00C4FF" Offset="0.985"/>
+            <GradientStop Color="#0000C4FF" Offset="1.0"/>
+            <!-- tamamen transparan -->
         </LinearGradientBrush>
     </Window.Resources>
 
-
-
     <Grid Background="#FF1E1E1E">
         <Canvas x:Name="RootCanvas" Margin="40">
+
             <!-- Arka border -->
             <Path x:Name="BaseBorderPath"
-      Stroke="#FF17B2E6"
-      StrokeThickness="1"
-      StrokeLineJoin="Round"
-      Fill="Transparent" />
+                  Stroke="#FF17B2E6"
+                  StrokeThickness="0.4"
+                  StrokeLineJoin="Round"
+                  Fill="Transparent" />
 
-            <!-- YUVARLAK KÖŞELİ, ORTASI KALIN UÇLARI İNCE YILAN -->
+            <!-- Sabit kalınlıklı yılan: Fill ile boyanan şerit -->
             <Path x:Name="SnakePath"
                   Fill="{StaticResource SnakeStrokeBrush}"
                   StrokeThickness="0"
                   StrokeLineJoin="Round" />
+
         </Canvas>
     </Grid>
 </Window>
