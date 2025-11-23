@@ -40,7 +40,7 @@
         </LinearGradientBrush>
     </Window.Resources>
 
-    <Grid Background="#FF1E1E1E">
+    <Grid Background="White">
         <Canvas x:Name="RootCanvas" Margin="40">
 
             <!-- Arka border -->

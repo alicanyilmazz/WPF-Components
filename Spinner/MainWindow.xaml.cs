@@ -12,7 +12,10 @@ namespace Spinner
         private const double SnakeFraction = 0.40;
 
         // Bir tam tur süresi (sn)
-        private const double PeriodSeconds = 4.0;
+        private const double PeriodSeconds = 7.0;
+        private const double JumpCycleSeconds = 3.5;   // 1 kaybolup-gelme süresi
+        private const double JumpVisiblePortion = 0.65; // döngünün yüzde kaçı görünür
+        private double _jumpPhase;                      // 0..1 arası faz
 
         // ✅ Çizgi her yerde eşit kalınlık
         private const double SnakeThickness = 3.0;
@@ -182,11 +185,7 @@ namespace Spinner
             double dt = (args.RenderingTime - _lastRenderTime).TotalSeconds;
             _lastRenderTime = args.RenderingTime;
 
-            // ✅ 0..1 progress ilerlet (kenarlara eşit süre)
-            _progress += dt / PeriodSeconds;
-            _progress -= Math.Floor(_progress);
-
-            // progress -> gerçek mesafe (kısa kenarlarda yavaş algılanır)
+            // Çizgi her zaman düzgün ilerlesin (kesintisiz hareket)
             double speed = _totalLength / PeriodSeconds;
 
             _headPos += speed * dt;
@@ -198,7 +197,46 @@ namespace Spinner
             if (tailPos < 0)
                 tailPos += _totalLength;
 
+            // Önce normal geometrimizi çiziyoruz
             UpdateSnakePath(tailPos, _headPos);
+
+            // 🔥 Şimdi yumuşak görünürlük (fade in / fade out)
+            _jumpPhase += dt / JumpCycleSeconds;
+            _jumpPhase -= Math.Floor(_jumpPhase); // 0..1'de tut
+
+            double phase = _jumpPhase;
+            double opacity;
+
+            // 0.0–0.3   : tam görünür
+            // 0.3–0.5   : yavaşça kaybol (1 -> 0)
+            // 0.5–0.7   : kayıp (neredeyse görünmez)
+            // 0.7–0.9   : yavaşça ortaya çık (0 -> 1)
+            // 0.9–1.0   : tekrar tam görünür
+
+            if (phase < 0.3)
+            {
+                opacity = 1.0;
+            }
+            else if (phase < 0.5)
+            {
+                double t = (phase - 0.3) / 0.2;   // 0..1
+                opacity = 1.0 - t;               // 1 -> 0
+            }
+            else if (phase < 0.7)
+            {
+                opacity = 0; // 0 yerine, çok hafif gölge
+            }
+            else if (phase < 0.9)
+            {
+                double t = (phase - 0.7) / 0.2;   // 0..1
+                opacity = t;                     // 0 -> 1
+            }
+            else
+            {
+                opacity = 1.0;
+            }
+
+            SnakePath.Opacity = opacity;
         }
 
         // Kenarlara eşit süre veren mapping
