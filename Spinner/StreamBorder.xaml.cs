@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace Spinner
 {
-    public partial class SnakeSpinnerControl : UserControl
+    public partial class StreamBorderControl : UserControl
     {
         // ========== Dependency Properties ==========
 
@@ -16,7 +16,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "SnakeFraction",
                 typeof(double),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(0.32, OnVisualPropertyChanged));
 
         public double SnakeFraction
@@ -30,7 +30,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "PeriodSeconds",
                 typeof(double),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(7.0));
 
         public double PeriodSeconds
@@ -44,7 +44,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "MinThickness",
                 typeof(double),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(4.0, OnVisualPropertyChanged));
 
         public double MinThickness
@@ -58,7 +58,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "MaxThickness",
                 typeof(double),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(6.0, OnVisualPropertyChanged));
 
         public double MaxThickness
@@ -72,7 +72,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "CornerRadius",
                 typeof(double),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(22.0, OnGeometryPropertyChanged));
 
         public double CornerRadius
@@ -86,7 +86,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "BorderColor",
                 typeof(Color),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(Color.FromRgb(0x17, 0xB2, 0xE6), OnBorderPropertyChanged));
 
         public Color BorderColor
@@ -100,7 +100,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "BorderStrokeThickness",
                 typeof(double),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(0.8, OnBorderPropertyChanged));
 
         public double BorderStrokeThickness
@@ -114,7 +114,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "OuterColor",
                 typeof(Color),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(Color.FromRgb(0x00, 0xD8, 0xFF), OnGradientPropertyChanged));
 
         public Color OuterColor
@@ -128,7 +128,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "InnerColor",
                 typeof(Color),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(Color.FromRgb(0x40, 0xF0, 0xFF), OnGradientPropertyChanged));
 
         public Color InnerColor
@@ -142,7 +142,7 @@ namespace Spinner
             DependencyProperty.Register(
                 "CenterColor",
                 typeof(Color),
-                typeof(SnakeSpinnerControl),
+                typeof(StreamBorderControl),
                 new PropertyMetadata(Color.FromRgb(0x80, 0xFA, 0xFF), OnGradientPropertyChanged));
 
         public Color CenterColor
@@ -153,25 +153,25 @@ namespace Spinner
 
         private static void OnVisualPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            SnakeSpinnerControl control = (SnakeSpinnerControl)d;
+            StreamBorderControl control = (StreamBorderControl)d;
             control._needsUpdate = true;
         }
 
         private static void OnGeometryPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            SnakeSpinnerControl control = (SnakeSpinnerControl)d;
+            StreamBorderControl control = (StreamBorderControl)d;
             control.SetupGeometry();
         }
 
         private static void OnBorderPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            SnakeSpinnerControl control = (SnakeSpinnerControl)d;
+            StreamBorderControl control = (StreamBorderControl)d;
             control.UpdateBorderVisual();
         }
 
         private static void OnGradientPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            SnakeSpinnerControl control = (SnakeSpinnerControl)d;
+            StreamBorderControl control = (StreamBorderControl)d;
             control.UpdateGradientColors();
         }
 
@@ -186,7 +186,7 @@ namespace Spinner
         private TimeSpan _lastRenderTime;
         private bool _needsUpdate = true;
 
-        public SnakeSpinnerControl()
+        public StreamBorderControl()
         {
             InitializeComponent();
 

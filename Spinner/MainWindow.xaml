@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <local:SnakeSpinnerControl x:Name="SpinnerControl"
+        <local:StreamBorderControl x:Name="SpinnerControl"
                                    Width="1024"
                                    Height="180"
                                    Margin="40"
