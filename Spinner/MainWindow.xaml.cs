@@ -9,14 +9,15 @@ namespace Spinner
     public partial class MainWindow : Window
     {
         // Yılan uzunluğu: toplam yolun yüzdesi
-        private const double SnakeFraction = 0.45;
+        private const double SnakeFraction = 0.40;
 
         // Bir tam tur süresi (sn)
         private const double PeriodSeconds = 4.0;
 
         // ✅ Çizgi her yerde eşit kalınlık
         private const double SnakeThickness = 3.0;
-
+        private const double MinThickness = 4.0;   // uçlardaki kalınlık
+        private const double MaxThickness = 5.0;   // ortadaki kalınlık
         // Path üzerindeki noktalar (eşit aralıklı sample)
         private List<Point> _points = new List<Point>();
         private List<double> _segLengths = new List<double>();
@@ -303,6 +304,65 @@ namespace Spinner
         }
 
         // ✅ Her yerde eşit kalınlıklı şerit
+        //private Geometry BuildConstantWidthGeometry(List<Point> centers)
+        //{
+        //    int n = centers.Count;
+        //    var leftPts = new List<Point>(n);
+        //    var rightPts = new List<Point>(n);
+
+        //    Vector lastDir = new Vector(1, 0);
+
+        //    for (int i = 0; i < n; i++)
+        //    {
+        //        Point p = centers[i];
+
+        //        Vector dir;
+        //        if (i == 0)
+        //            dir = centers[1] - centers[0];
+        //        else if (i == n - 1)
+        //            dir = centers[n - 1] - centers[n - 2];
+        //        else
+        //        {
+        //            Vector d1 = centers[i] - centers[i - 1];
+        //            Vector d2 = centers[i + 1] - centers[i];
+        //            dir = d1 + d2;
+        //        }
+
+        //        if (dir.LengthSquared < 1e-6)
+        //            dir = lastDir;
+        //        else
+        //            lastDir = dir;
+
+        //        dir.Normalize();
+
+        //        Vector nrm = new Vector(-dir.Y, dir.X);
+        //        double half = SnakeThickness / 2.0;
+
+        //        leftPts.Add(p + nrm * half);
+        //        rightPts.Add(p - nrm * half);
+        //    }
+
+        //    var fig = new PathFigure
+        //    {
+        //        StartPoint = leftPts[0],
+        //        IsClosed = true,
+        //        IsFilled = true
+        //    };
+
+        //    var seg = new PolyLineSegment();
+
+        //    for (int i = 1; i < leftPts.Count; i++)
+        //        seg.Points.Add(leftPts[i]);
+
+        //    for (int i = rightPts.Count - 1; i >= 0; i--)
+        //        seg.Points.Add(rightPts[i]);
+
+        //    fig.Segments.Add(seg);
+
+        //    var geom = new PathGeometry();
+        //    geom.Figures.Add(fig);
+        //    return geom;
+        //}
         private Geometry BuildConstantWidthGeometry(List<Point> centers)
         {
             int n = centers.Count;
@@ -335,10 +395,22 @@ namespace Spinner
                 dir.Normalize();
 
                 Vector nrm = new Vector(-dir.Y, dir.X);
-                double half = SnakeThickness / 2.0;
 
-                leftPts.Add(p + nrm * half);
-                rightPts.Add(p - nrm * half);
+                // 0..1 arasında param: 0 = kuyruk, 1 = baş
+                double t = (double)i / (n - 1);
+
+                // Ortası kalın, uçlarda ince: 0..1..0 tepe fonksiyonu
+                double s = 1.0 - 2.0 * Math.Abs(t - 0.5); // 0..1..0
+                if (s < 0) s = 0;
+
+                double thickness = MinThickness + (MaxThickness - MinThickness) * s;
+                double half = thickness / 2.0;
+
+                Point left = p + nrm * half;
+                Point right = p - nrm * half;
+
+                leftPts.Add(left);
+                rightPts.Add(right);
             }
 
             var fig = new PathFigure
