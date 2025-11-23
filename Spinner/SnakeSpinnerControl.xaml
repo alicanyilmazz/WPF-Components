@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Spinner.SnakeSpinnerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="200" d:DesignWidth="400"
+             Background="Transparent">
+
+    <Grid Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <Canvas x:Name="RootCanvas" Margin="0">
+            <!-- Arka border -->
+            <Path x:Name="BaseBorderPath"
+                  Stroke="#FF17B2E6"
+                  StrokeThickness="0.8"
+                  StrokeLineJoin="Round"
+                  Fill="Transparent" />
+
+            <!-- Yılan -->
+            <Path x:Name="SnakePath"
+                  StrokeThickness="0"
+                  StrokeLineJoin="Round">
+                <Path.Fill>
+                    <!-- Gradient'i code-behind'den parametrelerle güncelleyeceğiz -->
+                    <LinearGradientBrush x:Name="SnakeBrush"
+                                         StartPoint="0,0"
+                                         EndPoint="1,0"
+                                         MappingMode="RelativeToBoundingBox">
+
+                        <!-- Tail tarafı (uç, transparan) -->
+                        <GradientStop x:Name="OuterTailTransparent" Color="#00000000" Offset="0.0"/>
+                        <GradientStop x:Name="OuterTailFade"        Color="#AA00D8FF" Offset="0.015"/>
+
+                        <!-- Kenarlara yakın mavi -->
+                        <GradientStop x:Name="EdgeLeft"             Color="#FF00D8FF" Offset="0.20"/>
+
+                        <!-- Glow + merkez -->
+                        <GradientStop x:Name="GlowLeft"             Color="#FF40F0FF" Offset="0.38"/>
+                        <GradientStop x:Name="CenterStop"           Color="#FF80FAFF" Offset="0.50"/>
+                        <GradientStop x:Name="GlowRight"            Color="#FF40F0FF" Offset="0.62"/>
+
+                        <!-- Sağ kenar -->
+                        <GradientStop x:Name="EdgeRight"            Color="#FF00D8FF" Offset="0.80"/>
+
+                        <!-- Head tarafı -->
+                        <GradientStop x:Name="OuterHeadFade"        Color="#AA00D8FF" Offset="0.985"/>
+                        <GradientStop x:Name="OuterHeadTransparent" Color="#00000000" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
+        </Canvas>
+    </Grid>
+</UserControl>
