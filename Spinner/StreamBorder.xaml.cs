@@ -303,6 +303,9 @@ namespace Spinner
             _pauseTimer = 0;
             _isRunning = true;
 
+            // Tekrar bir animasyon başlıyorsa görünür olsun
+            this.Visibility = Visibility.Visible;
+
             // Başlangıçta yılanın başını canonical pozisyona koy
             if (_totalLength > 0)
             {
@@ -527,7 +530,14 @@ namespace Spinner
                 _remainingLoops--;
                 if (_remainingLoops <= 0)
                 {
-                    _isRunning = false; // burada duruyoruz
+                    // 🔥 Artık bitiş anındayız
+                    if (!KeepVisibleAfterFinish)
+                    {
+                        // Component tamamen kaybolsun
+                        this.Visibility = Visibility.Collapsed;
+                    }
+
+                    _isRunning = false; // animasyonu durdur
                     return;
                 }
             }
@@ -540,6 +550,21 @@ namespace Spinner
             }
         }
 
+        // Tur bittikten sonra görünür kalsın mı?
+        // true  => finite loop bitse de ekranda kalsın
+        // false => finite loop bittiğinde control kaybolsun (Collapsed)
+        public static readonly DependencyProperty KeepVisibleAfterFinishProperty =
+            DependencyProperty.Register(
+                "KeepVisibleAfterFinish",
+                typeof(bool),
+                typeof(StreamBorderControl),
+                new PropertyMetadata(true));
+
+        public bool KeepVisibleAfterFinish
+        {
+            get { return (bool)GetValue(KeepVisibleAfterFinishProperty); }
+            set { SetValue(KeepVisibleAfterFinishProperty, value); }
+        }
         private void UpdateSnakePath(double tail, double head)
         {
             List<Point> centers = new List<Point>();

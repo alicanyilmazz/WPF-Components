@@ -23,8 +23,9 @@
                                    OuterColor="#00D8FF"
                                    InnerColor="#40F0FF"
                                    CenterColor="#80FAFF"
-                                   LoopCountSetting="*"
+                                   LoopCountSetting="2"
                                    PauseAfterFullTurnSeconds="8"
+                                   KeepVisibleAfterFinish="False"
                                    />
     </Grid>
 </Window>
