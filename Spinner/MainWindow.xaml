@@ -4,11 +4,11 @@
         xmlns:local="clr-namespace:Spinner"
         Title="MainWindow"
         Height="1024" Width="768"
-        Background="White"
+        Background="Gray"
         WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <local:StreamBorderControl x:Name="SpinnerControl"
+        <!--<local:StreamBorderControl x:Name="SpinnerControl"
                                    Width="1024"
                                    Height="180"
                                    Margin="40"
@@ -26,6 +26,8 @@
                                    LoopCountSetting="2"
                                    PauseAfterFullTurnSeconds="8"
                                    KeepVisibleAfterFinish="False"
-                                   />
+                                   />-->
+        <local:CountdownTimer Duration="0:00:30" AutoStart="True"/>
+
     </Grid>
 </Window>
