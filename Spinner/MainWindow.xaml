@@ -3,31 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Spinner"
         Title="MainWindow"
-        Height="1024" Width="768"
-        Background="Gray"
+        Height="600" Width="600"
+        Background="White"
         WindowStartupLocation="CenterScreen">
 
-    <Grid>
-        <!--<local:StreamBorderControl x:Name="SpinnerControl"
-                                   Width="1024"
-                                   Height="180"
-                                   Margin="40"
-                                   Background="White"
-                                   SnakeFraction="0.40"
-                                   PeriodSeconds="7"
-                                   MinThickness="2"
-                                   MaxThickness="5"
-                                   CornerRadius="22"
-                                   BorderColor="#FF17B2E6"
-                                   BorderStrokeThickness="0.8"
-                                   OuterColor="#00D8FF"
-                                   InnerColor="#40F0FF"
-                                   CenterColor="#80FAFF"
-                                   LoopCountSetting="2"
-                                   PauseAfterFullTurnSeconds="8"
-                                   KeepVisibleAfterFinish="False"
-                                   />-->
-        <local:CountdownTimer Duration="0:00:30" AutoStart="True"/>
-
+    <Grid Margin="20">
+        <local:QrCodeControl
+            QrData="https://github.com/alicanyilmazz/Spinner"
+            QrWidth="280"
+            QrHeight="280"
+            DarkColorHex="#FF000000"
+            LightColorHex="#FFFFFFFF"/>
     </Grid>
 </Window>
