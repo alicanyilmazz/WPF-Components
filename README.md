@@ -107,8 +107,6 @@ Add screenshots here:
   - `True`: keeps the border visible (usually static) after the animation ends
   - `False`: hides/removes the animated stream after completion (often used for “loading finished” state)
 
-> Tip: GIFs increase trust and make the repo instantly understandable.
-
 ---
 
 ## ✅ Requirements
