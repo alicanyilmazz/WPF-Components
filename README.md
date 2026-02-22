@@ -50,11 +50,11 @@ The focus is on:
 
 ## 📸 Screenshots / Demo
 
-Add screenshots or short GIFs here:
+Add screenshots here:
 
-- `<img width="320" height="327" alt="image" src="https://github.com/user-attachments/assets/667c6815-df97-4a10-8fba-69f2a880781f" />`
-- `<img width="515" height="363" alt="image" src="https://github.com/user-attachments/assets/ce23f818-2442-44d1-870a-85a13d989edc" />`
-- `<img width="1159" height="317" alt="image" src="https://github.com/user-attachments/assets/3c86a190-a716-4647-9347-c99c4366fdb3" />`
+- <img width="320" height="327" alt="image" src="https://github.com/user-attachments/assets/667c6815-df97-4a10-8fba-69f2a880781f" />
+- <img width="515" height="363" alt="image" src="https://github.com/user-attachments/assets/ce23f818-2442-44d1-870a-85a13d989edc" />
+- <img width="1159" height="317" alt="image" src="https://github.com/user-attachments/assets/3c86a190-a716-4647-9347-c99c4366fdb3" />
 
 > Tip: GIFs increase trust and make the repo instantly understandable.
 
